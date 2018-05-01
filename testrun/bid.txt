@@ -1,0 +1,24 @@
+{
+  "project": 
+  	{
+  		"id": "159",
+  		"projectName": "NetworkInstall",
+  		"description": "Network install for new home",
+  		"budget": "1000",
+  		"endingDate": "2018-04-15",
+  		"owner": 
+  			{	
+  				"id": "158",
+  				"name": "Lee",
+  	 			"contactInfo": "408-8796543"
+  			}
+  	},
+  "engineer": 
+  	{
+  		"id": "158",
+  		"name": "Lee",
+  		"contactInfo": "408-8796543"
+  	},
+  "amount": "1000",
+  "proposal": "5 years network install experience."
+}
