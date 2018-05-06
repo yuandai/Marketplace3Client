@@ -3,6 +3,7 @@ package com.market.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -73,7 +74,7 @@ public class WebController {
 	 */
 
 	
-	@GetMapping("/MarketPlace/rest/service/bidsByPerson")		
+	@GetMapping("/rest/service/bidsByPerson")		
 	public ResponseEntity<?> responseBid(@RequestParam("name") String name) {
 												
 		BidsDTO bidDTO = bidHelper.getBidsOfPerson(name);
@@ -82,7 +83,7 @@ public class WebController {
 								
 	}
 	
-	@GetMapping("/MarketPlace/rest/service/bidsByProject")		
+	@GetMapping("/rest/service/bidsByProject")		
 	public ResponseEntity<?> responseBidProject(@RequestParam("projectName") String projectName ) {
 												
 		ProjectBidsDTO projBidsDTO = projectHelper.getProjectWithAllBids(projectName); 
@@ -94,28 +95,28 @@ public class WebController {
 	
 	
 
-	@PostMapping("/MarketPlace/rest/service/bids")		
+	@PostMapping("/rest/service/bids")		
 	public ResponseEntity<?> createBid(@Valid @RequestBody Bid bid, Errors errors) {
 									
 		boolean result = bidHelper.createBid(bid);
 			
 		if (result)
-			return ResponseEntity.ok(Constant.successMsg);
+			return new ResponseEntity(HttpStatus.OK);
 		else
-			return ResponseEntity.ok(Constant.errMsg);
+			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 			
 	}
 	
 	
-	@PutMapping("/MarketPlace/rest/service/bids")		
+	@PutMapping("/rest/service/bids")		
 	public ResponseEntity<?> updateBid(@Valid @RequestBody Bid bid, Errors errors) {
 									
 		boolean result = bidHelper.updateBid(bid);
 			
 		if (result)
-			return ResponseEntity.ok(Constant.successMsg);
+			return new ResponseEntity(HttpStatus.OK);
 		else
-			return ResponseEntity.ok(Constant.errMsg);
+			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 			
 	}
     
@@ -125,16 +126,16 @@ public class WebController {
 	 */
 	
 	
-	@PostMapping("/MarketPlace/rest/service/persons")	
+	@PostMapping("/rest/service/persons")	
 	public ResponseEntity<?> createPerson(@Valid @RequestBody Person person, Errors errors) {
 									
         
 		boolean result = personHelper.createPerson(person);
 			
 		if (result)
-			return ResponseEntity.ok(Constant.successMsg);
+			return new ResponseEntity(HttpStatus.OK);
 		else
-			return ResponseEntity.ok(Constant.errMsg);
+			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 			
 	}
 	
@@ -144,7 +145,7 @@ public class WebController {
 	 */
 	
 	
-	@GetMapping("/MarketPlace/rest/service/projects")		
+	@GetMapping("/rest/service/projects")		
 	public ResponseEntity<?> responseProject(@RequestParam("name") String name) {
 						        	
 		ProjectsDTO projDTO = projectHelper.getProjectsOfPerson(name);
@@ -152,27 +153,27 @@ public class WebController {
 					
 	}
     
-	@PostMapping("/MarketPlace/rest/service/projects")		
+	@PostMapping("/rest/service/projects")		
 	public ResponseEntity<?> createProject(@Valid @RequestBody Project project, Errors errors) {
 									
 		boolean result = projectHelper.createProject(project);
 			
 		if (result)
-			return ResponseEntity.ok(Constant.successMsg);
+			return new ResponseEntity(HttpStatus.OK);
 		else
-			return ResponseEntity.ok(Constant.errMsg);
+			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
 	
-	@PutMapping("/MarketPlace/rest/service/projects")		
+	@PutMapping("/rest/service/projects")		
 	public ResponseEntity<?> updateProject(@Valid @RequestBody Project project, Errors errors) {
 									
 		boolean result = projectHelper.updateProject(project);
 			
 		if (result)
-			return ResponseEntity.ok(Constant.successMsg);
+			return new ResponseEntity(HttpStatus.OK);
 		else
-			return ResponseEntity.ok(Constant.errMsg);
+			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
 	
@@ -182,19 +183,19 @@ public class WebController {
 	 */
     
     
-	@PostMapping("/MarketPlace/rest/service/initial")
+	@PostMapping("/rest/service/initial")
 	public ResponseEntity<?> initial() {
 		        
 		commonHelper.initial();
-		return ResponseEntity.ok(Constant.successMsg);
+		return new ResponseEntity(HttpStatus.NO_CONTENT);
 
 	}
 	
-	@PostMapping("/MarketPlace/rest/service/assign")
+	@PostMapping("/rest/service/assign")
 	public ResponseEntity<?> assign() {
 									        
 		commonHelper.assign();
-		return ResponseEntity.ok(Constant.successMsg);
+		return new ResponseEntity(HttpStatus.NO_CONTENT);
 
 	}
 	

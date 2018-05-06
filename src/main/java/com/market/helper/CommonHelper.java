@@ -49,7 +49,6 @@ public class CommonHelper {
 				"5 years PC repair experience", 
 				new BigDecimal(90)));
 		
-		
 	}
 	
 

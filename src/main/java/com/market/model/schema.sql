@@ -17,3 +17,4 @@ create unique index person_key on PERSON(NAME);
 select * from person;
 select * from project;
 select * from bid;
+
