@@ -13,61 +13,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.market.helper.BidHelper;
-import com.market.helper.CommonHelper;
-import com.market.helper.PersonHelper;
-import com.market.helper.ProjectHelper;
+import com.market.helper.RemoteHelper;
 import com.market.model.Bid;
 import com.market.model.Person;
 import com.market.model.Project;
-import com.market.repo.BidRepository;
-import com.market.repo.PersonRepository;
-import com.market.repo.ProjectRepository;
 import com.market.transfer.BidsDTO;
 import com.market.transfer.ProjectBidsDTO;
 import com.market.transfer.ProjectsDTO;
 
 @RestController
 public class WebController {
-	@Autowired
-	PersonRepository personRepo;
-	@Autowired
-	ProjectRepository projectRepo;
-	@Autowired
-	BidRepository bidRepo;
 		
 	@Autowired
-	CommonHelper commonHelper;
+	RemoteHelper remoteHelper;
+
 	
-    @Autowired
-    public void setCommonHelper(CommonHelper commonHelper) {
-        this.commonHelper = commonHelper;
-    }
-    
-	@Autowired
-	PersonHelper personHelper;
-	
-    @Autowired
-    public void setPersonHelper(PersonHelper personHelper) {
-        this.personHelper = personHelper;
-    }
-    
-	@Autowired
-	ProjectHelper projectHelper;
-	
-    @Autowired
-    public void setProjectHelper(ProjectHelper projectHelper) {
-        this.projectHelper = projectHelper;
-    }
-    
-	@Autowired
-	BidHelper bidHelper;
-	
-    @Autowired
-    public void setBidHelper(BidHelper bidHelper) {
-        this.bidHelper = bidHelper;
-    }
-    
     
 	/*
 	 * Bid RestAPIs
@@ -77,7 +37,7 @@ public class WebController {
 	@GetMapping("/rest/service/bidsByPerson")		
 	public ResponseEntity<?> responseBid(@RequestParam("name") String name) {
 												
-		BidsDTO bidDTO = bidHelper.getBidsOfPerson(name);
+		BidsDTO bidDTO = remoteHelper.getBidsOfPerson(name);
 			
 		return ResponseEntity.ok(bidDTO);
 								
@@ -86,7 +46,7 @@ public class WebController {
 	@GetMapping("/rest/service/bidsByProject")		
 	public ResponseEntity<?> responseBidProject(@RequestParam("projectName") String projectName ) {
 												
-		ProjectBidsDTO projBidsDTO = projectHelper.getProjectWithAllBids(projectName); 
+		ProjectBidsDTO projBidsDTO = remoteHelper.getProjectWithAllBids(projectName); 
 				
 		return ResponseEntity.ok(projBidsDTO);
 					
@@ -98,7 +58,7 @@ public class WebController {
 	@PostMapping("/rest/service/bids")		
 	public ResponseEntity<?> createBid(@Valid @RequestBody Bid bid, Errors errors) {
 									
-		boolean result = bidHelper.createBid(bid);
+		boolean result = remoteHelper.createBid(bid);
 			
 		if (result)
 			return new ResponseEntity(HttpStatus.OK);
@@ -111,7 +71,7 @@ public class WebController {
 	@PutMapping("/rest/service/bids")		
 	public ResponseEntity<?> updateBid(@Valid @RequestBody Bid bid, Errors errors) {
 									
-		boolean result = bidHelper.updateBid(bid);
+		boolean result = remoteHelper.updateBid(bid);
 			
 		if (result)
 			return new ResponseEntity(HttpStatus.OK);
@@ -130,7 +90,7 @@ public class WebController {
 	public ResponseEntity<?> createPerson(@Valid @RequestBody Person person, Errors errors) {
 									
         
-		boolean result = personHelper.createPerson(person);
+		boolean result = remoteHelper.createPerson(person);
 			
 		if (result)
 			return new ResponseEntity(HttpStatus.OK);
@@ -148,7 +108,7 @@ public class WebController {
 	@GetMapping("/rest/service/projects")		
 	public ResponseEntity<?> responseProject(@RequestParam("name") String name) {
 						        	
-		ProjectsDTO projDTO = projectHelper.getProjectsOfPerson(name);
+		ProjectsDTO projDTO = remoteHelper.getProjectsOfPerson(name);
 		return ResponseEntity.ok(projDTO);
 					
 	}
@@ -156,7 +116,7 @@ public class WebController {
 	@PostMapping("/rest/service/projects")		
 	public ResponseEntity<?> createProject(@Valid @RequestBody Project project, Errors errors) {
 									
-		boolean result = projectHelper.createProject(project);
+		boolean result = remoteHelper.createProject(project);
 			
 		if (result)
 			return new ResponseEntity(HttpStatus.OK);
@@ -168,7 +128,7 @@ public class WebController {
 	@PutMapping("/rest/service/projects")		
 	public ResponseEntity<?> updateProject(@Valid @RequestBody Project project, Errors errors) {
 									
-		boolean result = projectHelper.updateProject(project);
+		boolean result = remoteHelper.updateProject(project);
 			
 		if (result)
 			return new ResponseEntity(HttpStatus.OK);
@@ -186,7 +146,7 @@ public class WebController {
 	@PostMapping("/rest/service/initial")
 	public ResponseEntity<?> initial() {
 		        
-		commonHelper.initial();
+		remoteHelper.initial();
 		return new ResponseEntity(HttpStatus.NO_CONTENT);
 
 	}
@@ -194,7 +154,7 @@ public class WebController {
 	@PostMapping("/rest/service/assign")
 	public ResponseEntity<?> assign() {
 									        
-		commonHelper.assign();
+		remoteHelper.assign();
 		return new ResponseEntity(HttpStatus.NO_CONTENT);
 
 	}

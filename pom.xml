@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.market</groupId>
-	<artifactId>MarketPlace</artifactId>
+	<artifactId>MarketPlaceClient</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>MarketPlace</name>
-	<description>Demo project for Market Place</description>
+	<name>MarketPlaceClient</name>
+	<description>Demo project for Market Place - Client</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -35,22 +35,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-freemarker</artifactId>
 		</dependency>
-		<!-- Add JPA support -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<!-- Add Hikari Connection Pooling support -->
-		<dependency>
-			<groupId>com.zaxxer</groupId>
-			<artifactId>HikariCP</artifactId>
-		</dependency>
-		<!-- Add postgres database support [for running with local profile] -->
-		<dependency>
-  			<groupId>org.postgresql</groupId>
-  			<artifactId>postgresql</artifactId>
-  			<version>9.4-1206-jdbc42</version>
-		</dependency> 
 
 		<dependency>
     		<groupId>org.apache.commons</groupId>
@@ -65,10 +49,34 @@
 		</dependency>
 
 
-
-
-
+	<!-- start microservice dependencies -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+		</dependency>
+	<!-- end microservice dependencies -->
+	
 	</dependencies>
+
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Camden.SR3</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+
 
 	<build>
 		<plugins>
@@ -77,7 +85,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <jvmArguments>
-                        -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=9898
+                        -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=9894
                     </jvmArguments>
                 </configuration>
                 <executions>

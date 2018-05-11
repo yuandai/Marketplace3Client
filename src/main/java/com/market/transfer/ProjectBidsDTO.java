@@ -16,6 +16,10 @@ public class ProjectBidsDTO {
 	private ProjectDTO project;
 	private ArrayList<BidDTO> bids;
 	
+	public ProjectBidsDTO() {
+		this.project = new ProjectDTO();
+		this.bids = new ArrayList<BidDTO>();
+	}
 
 	public ProjectBidsDTO(Project proj, List<Bid> bidList) {
 		

@@ -1,35 +1,13 @@
 package com.market.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-
-@Entity
-@Table(name = "bid")
-public class Bid implements Serializable {
+public class Bid  {
 	
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@Column(name = "proposal")
 	private String proposal;
-	@Column(name = "amount")
 	private BigDecimal amount;
-    @OneToOne
-    @JoinColumn(name="engineer_id", insertable=true, updatable=true, nullable=false)	
 	private Person engineer;
-    @OneToOne
-    @JoinColumn(name="project_id", insertable=true, updatable=true, nullable=false)	
 	private Project project;
 	
 	
@@ -87,13 +65,5 @@ public class Bid implements Serializable {
 		return this.project;
 	}
 
-
-	@Override
-	public String toString() {
-	        return new StringBuffer(" Project Name : ").append(this.project.getProjectName())
-	                .append(" Engineer Name : ").append(this.engineer.getName())
-	                .append(" Proposal : ").append(this.proposal)
-	                .append(" Amount : ").append(this.amount).toString();
-	}
 
 }
